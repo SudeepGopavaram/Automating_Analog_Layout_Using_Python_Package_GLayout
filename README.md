@@ -89,7 +89,12 @@ GLayout will be generating the DRC clean layout & SPICE netlist for any PDK, com
 
 ```
 python <filename>
+```
+If you get the following error then try the below mentioned commands
+![Numpy_error](https://github.com/user-attachments/assets/86e25f1b-f8bc-4f7e-ba59-107218d89f3e)
 
+
+```python
 python3.10 -m pip install "numpy2.0.0"
 python <filename>
 ```
