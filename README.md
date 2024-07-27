@@ -197,10 +197,37 @@ adjmettrack.show()
 adjmettrack.write_gds('adjmettrack.gds')
 ```
 
+## Using Primitives
+ 
+ You can find all the primitives that are avaible to us with their sourc code [here](https://github.com/idea-fasoc/OpenFASOC/tree/main/openfasoc/generators/glayout/glayout/flow/primitives)
+
+```python
+from glayout.flow.primitive.fet import pmos
+from glayout.flow.primitive.fet import nmos
+
+def twotransistor(pdk)
+nfet = nmos(pdk)
+pfet = pmos(pdk)
+top_level = component()
+pfet_ref = top_level << pfet
+nfet_ref = top_level << nfet
+compsep = pdk.util_max_metal_separation()  //maximum metal separation(all metal) in a pdk
+nfet_ref.movex(compsep + evaluate_bbox(pfet)[0])
+return top_level
+
+twoadjtransistor = twotransisitor(sky130)
+twoadjtransistor.write_gds(twatransisitor.gds)
+twoadjtransistor.show()
+```
+## Routing & Ports
+
+
+
 
 ### Important Links to Refer
 
 [sscs-ose/sscs-ose-chipathon.github.io](https://github.com/sscs-ose/sscs-ose-chipathon.github.io)
 
 [GLayout uick Start Guide Notebook](https://colab.research.google.com/drive/1mU7-zmAWgDRJqaZGP-RkSXCSgRkHOb--?usp=sharing#scrollTo=-Xp4cEjkeHIx)
+
 
