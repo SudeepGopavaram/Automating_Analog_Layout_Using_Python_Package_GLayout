@@ -83,14 +83,11 @@ GLayout will be generating the DRC clean layout & SPICE netlist for any PDK, com
 --------------------------------
 
 
-
-
-## Using glayer
-
 ```
 python <filename>
 ```
 If you get the following error then try the below mentioned commands
+
 ![Numpy_error](https://github.com/user-attachments/assets/86e25f1b-f8bc-4f7e-ba59-107218d89f3e)
 
 
@@ -98,6 +95,9 @@ If you get the following error then try the below mentioned commands
 python3.10 -m pip install "numpy2.0.0"
 python <filename>
 ```
+
+
+## Using glayer
 
 ```python
 #Importing the mappedPDK class for sky130 & gf180 process
@@ -110,12 +110,15 @@ gf180_met1  = gf180.get_glayer("met1")
 sky130_poly = sky130.get_glayer("poly")
 gf180_poly  = gf180.get_glayer("poly")
 
-#Printing tuple values
-print(sky130_met1)
-print(gf180_met1)
-print(sky130_poly)
-print(gf180_poly)
+#printing tuple for met1 in respective process
+print(f"sky130_met1:{sky130_met1}")
+print(f"gf180_met1: {gf180_met1}")
+print(f"sky130_poly: {sky130_poly}")
+print(f"gf180_poly: {gf180_poly}")
 ```
+![tuple.py](https://github.com/user-attachments/assets/ae0a6a72-5cfe-4abd-9c1b-8fb5d4472fcf)
+
+
 ## Using grule
 
 ```python
@@ -125,20 +128,22 @@ from glayout.flow.pdk.sky130_mapped import sky130_mapped_pdk as sky130
 from glayout.flow.pdk.gf180_mapped import gf180_mapped_pdk as gf180
 
 #Using the get_grule() method
-min_width_via1 = sky130.get_grule('via1')['min_width']
+min_width_via1 = sky130.get_grule('via1')["min_width"]
 //it returns a dictonary of layout rules 
 
 #Printing the minimum width
 print(f"minimmum width for via1 {min_width_via1}")
 ```
+![min_width](https://github.com/user-attachments/assets/48db3654-e64e-41b5-86b6-6a8ed944d949)
+
 
 ```python
 #Minimum Enclosure
 from glayout.flow.pdk.sky130_mapped import sky130_mapped_pdk as sky130
 from glayout.flow.pdk.gf180_mapped import gf180_mapped_pdk as gf180
 
-min_enc_met1 = sky130.get_grule('via1','met1')['min_enclosure']
-min_enc_met2 = sky130.get_grule('via1','met2')['min_enclosure']
+min_enc_met1 = sky130.get_grule('via1','met1')["min_enclosure"]
+min_enc_met2 = sky130.get_grule('via1','met2')["min_enclosure"]
 
 
 print("sky130")
@@ -146,8 +151,8 @@ print(f"min enclosure met1 and via1: {min_enc_met1}")
 print(f"min enclosure met2 and via1: {min_enc_met2}")
 
 
-min_enc_met1 = gf180.get_grule('via1','met1')['min_enclosure']
-min_enc_met2 = gf180.get_grule('via1','met2')['min_enclosure']
+min_enc_met1 = gf180.get_grule('via1','met1')["min_enclosure"]
+min_enc_met2 = gf180.get_grule('via1','met2')["min_enclosure"]
 
 
 print("gf180")
@@ -155,15 +160,26 @@ print(f"min enclosure met1 and via1: {min_enc_met1}")
 print(f"min enclosure met2 and via1: {min_enc_met2}")
 ```
 
+![min_enc](https://github.com/user-attachments/assets/56e67e1a-ff91-4094-99ae-ab68e269bad1)
+
+
 ```python
 #Minimum Spacing
 from glayout.flow.pdk.sky130_mapped import sky130_mapped_pdk as sky130
 from glayout.flow.pdk.gf180_mapped import gf180_mapped_pdk as gf180
 
-min_met1_spacing = sky130.get_grule('met1','met1')["min_separation"]
+min_met1_spacing = sky130.get_grule('met1', 'met1')["min_separation"]
+min_met1_spacing = gf180.get_grule('met1', 'met1')["min_separation"]
 
-print(f"min spacing between metal: {min_met1_spacing}")
+print("sky130")
+print(f"min spacing between metal1: {min_met1_spacing}")
+
+print("gf180")
+print(f"min spacing between metal1: {min_met1_spacing}")
 ```
+![min_spacing](https://github.com/user-attachments/assets/d170937b-a9f7-4025-af0e-70526a0ba44c)
+
+
 ## Drawing Actual Layout
 
 ```python
@@ -186,6 +202,9 @@ metalTrack.write_gds('met1track.gds')
 #To view the layout in klayout
 metalTrack.show()
 ```
+![met1_track](https://github.com/user-attachments/assets/5fb52fff-864b-45fd-a0d2-4a472fb9bbb6)
+
+
 ## Using and manipulating the component
 
 ```python
@@ -209,6 +228,9 @@ adjmettrack.show()
 adjmettrack.write_gds('adjmettrack.gds')
 ```
 
+![adj_met1_tracks](https://github.com/user-attachments/assets/fd5f62b4-2ba6-404c-ae0c-1868b0ada8db)
+
+
 ## Using Primitives
  
  You can find all the primitives that are avaible to us with their sourc code [here](https://github.com/idea-fasoc/OpenFASOC/tree/main/openfasoc/generators/glayout/glayout/flow/primitives)
@@ -231,6 +253,8 @@ twoadjtransistor = twotransisitor(sky130)
 twoadjtransistor.write_gds(twatransisitor.gds)
 twoadjtransistor.show()
 ```
+
+
 ## Routing & Ports
 
 
