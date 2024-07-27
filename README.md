@@ -87,6 +87,13 @@ GLayout will be generating the DRC clean layout & SPICE netlist for any PDK, com
 
 ## Using glayer
 
+```
+python <filename>
+
+python3.10 -m pip install "numpy2.0.0"
+python <filename>
+```
+
 ```python
 #Importing the mappedPDK class for sky130 & gf180 process
 from glayout.flow.pdk.sky130_mapped import sky130_mapped_pdk as sky130
