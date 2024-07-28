@@ -135,11 +135,12 @@ cd OpenFASOC/docker/conda
 sudo docker build -t openfasoc:glayout .
 cd ../../
 sudo docker run -v $(pwd):$(pwd) -w $(pwd) --name glayoutcontainer -it openfasoc:glayout
+```
 
+```python
 pip install -r requirements.txt
 
 pip install gdstk prettyprint
-
 ```
 
 ***for running graphical applications (such as klayout) in the docker container Open a terminal and run***
@@ -150,8 +151,8 @@ xhost +Local:*
 ```
 
 7. Open the Docker Container (the following commands create a new container from the image)
-8. 
-```
+
+```bash
 #For Linux
 sudo docker run -v $(pwd):$(pwd) -w $(pwd) -e DISPLAY -v /temp/.X11-unix:/tmp/.X11-unix --net=host -it --name glayoutcontainer openfasoc:glayout
 
@@ -202,7 +203,7 @@ This script will test if:
 ## Installing kLive
 
 1. Run your container using a previously described run command (Step 8 of Install with Docker)
-2. Run KLayout by just typing “klayout” in the docker container
+2. Run KLayout by just typing ```klayout``` in the docker container
 3. Install KLive
    
    a. Go to Tools -> Manage Packages -> Install New Packages -> Search
@@ -213,8 +214,8 @@ This script will test if:
    
    ![kLive](https://github.com/user-attachments/assets/e9da2473-e47c-47d3-890f-d34ae94fb6f1)
    
-5. Once it's installed, on your host system. Type in “docker ps -a”. This will list all of your running containers. Copy the container ID of the most recently started one or the one you installed klive
-6. Enter the command “docker commit <container id> openfasoc:glayout
+5. Once it's installed, on your host system. Type in ```docker ps -a```. This will list all of your running containers. Copy the container ID of the most recently started one or the one you installed klive
+6. Enter the command ```docker commit <container id> openfasoc:glayout```
 
 you can follow the following playlist to view practical implementation of installation [here](https://www.youtube.com/watch?v=omjUs0bUGHo&list=PLlSXtIpWKQOBaUgQ6gQqfz39XhUoLEWgj) or the following document [here](https://docs.google.com/document/d/e/2PACX-1vRL8ksIvB-fHaqWgkgBPDUznOcDmmFhNrvzPNx9GSSkZyfhJYexEI9gBZCJ0SNNnHdUrAf1EBOeU182/pub) for all the different platforms.
 
