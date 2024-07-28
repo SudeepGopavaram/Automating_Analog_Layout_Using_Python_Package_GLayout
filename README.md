@@ -163,7 +163,9 @@ docker run -it -v /tmp/.X11-unix:/tmp/.X11-unix -v /mnt/wslg:/mnt/wslg -v $(pwd)
 1. To remove the container, run the command: docker container rm glayoutcontainer
 2. To restart the container, run the command docker container restart glayoutcontainer
 3. To execute a running container, first check its status by running
+   
    a. docker container ls -a
+   
    b. docker exec -it glayoutcontainer bash (if glayoutcontainer is running) (-it runs the container in interactive mode)
 
 ***Note: ‘exit’ in a running docker container halts all running processes and stops. A graceful shutdown can be achieved by using ```docker stop glayoutcontainer```***
@@ -192,7 +194,9 @@ This script will test if:
 3. The PDKs sky130 or gf180 have been installed and are in their expected locations
 4. Python packages have been properly installed
 5. glayout is working as required. The script:
+   
    a. places an nmos component
+   
    b. runs a Layout-vs-Schematic check on it
 
 ## Installing kLive
@@ -200,12 +204,17 @@ This script will test if:
 1. Run your container using a previously described run command (Step 8 of Install with Docker)
 2. Run KLayout by just typing “klayout” in the docker container
 3. Install KLive
+   
    a. Go to Tools -> Manage Packages -> Install New Packages -> Search
+   
    b. Search for KLive
+   
    c. Install the package that looks like this:
+   
    ![kLive](https://github.com/user-attachments/assets/e9da2473-e47c-47d3-890f-d34ae94fb6f1)
-4. Once it's installed, on your host system. Type in “docker ps -a”. This will list all of your running containers. Copy the container ID of the most recently started one or the one you installed klive
-5. Enter the command “docker commit <container id> openfasoc:glayout
+   
+5. Once it's installed, on your host system. Type in “docker ps -a”. This will list all of your running containers. Copy the container ID of the most recently started one or the one you installed klive
+6. Enter the command “docker commit <container id> openfasoc:glayout
 
 you can follow the following playlist to view practical implementation of installation [here](https://www.youtube.com/watch?v=omjUs0bUGHo&list=PLlSXtIpWKQOBaUgQ6gQqfz39XhUoLEWgj) or the following document [here](https://docs.google.com/document/d/e/2PACX-1vRL8ksIvB-fHaqWgkgBPDUznOcDmmFhNrvzPNx9GSSkZyfhJYexEI9gBZCJ0SNNnHdUrAf1EBOeU182/pub) for all the different platforms.
 
