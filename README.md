@@ -80,6 +80,135 @@ GLayout will be generating the DRC clean layout & SPICE netlist for any PDK, com
 
 # Installation
 
+Run the following command to uninstall all conflicting packages:
+
+```bash
+for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+```
+
+1. Set up Docker's apt repository.
+   
+```bash
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+```
+
+2. To install the latest version, run:
+
+```bash
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+3. Verify that the Docker Engine installation is successful by running the hello-world image.
+
+```bash
+sudo docker run hello-world
+```
+
+4. clone the OpenFASOC repository
+
+```bash
+git clone https://github.com/idea-fasoc/OpenFASOC.git
+```
+
+5. Navigate to the docker folder
+
+```bash
+cd OpenFASOC/docker/conda
+```
+
+6. Build and run the Docker container
+
+```bash
+#For Linux/WSL
+sudo docker build -t openfasoc:glayout .
+cd ../../
+sudo docker run -v $(pwd):$(pwd) -w $(pwd) --name glayoutcontainer -it openfasoc:glayout
+
+pip install -r requirements.txt
+
+pip install gdstk prettyprint
+
+```
+
+***for running graphical applications (such as klayout) in the docker container Open a terminal and run***
+
+```bash
+#For Linux/WSL
+xhost +Local:*
+```
+
+7. Open the Docker Container (the following commands create a new container from the image)
+8. 
+```
+#For Linux
+sudo docker run -v $(pwd):$(pwd) -w $(pwd) -e DISPLAY -v /temp/.X11-unix:/tmp/.X11-unix --net=host -it --name glayoutcontainer openfasoc:glayout
+
+#For WSL
+docker run -it -v /tmp/.X11-unix:/tmp/.X11-unix -v /mnt/wslg:/mnt/wslg -v $(pwd):$(pwd) -w $(pwd)  -e DISPLAY -e WAYLAND_DISPLAY -e XDG_RUNTIME_DIR -e PULSE_SERVER --name glayoutcontainer openfasoc:glayout
+```
+
+**Miscellaneous Docker Commands -**
+1. To remove the container, run the command: docker container rm glayoutcontainer
+2. To restart the container, run the command docker container restart glayoutcontainer
+3. To execute a running container, first check its status by running
+   a. docker container ls -a
+   b. docker exec -it glayoutcontainer bash (if glayoutcontainer is running) (-it runs the container in interactive mode)
+
+***Note: ‘exit’ in a running docker container halts all running processes and stops. A graceful shutdown can be achieved by using ```docker stop glayoutcontainer```***
+
+## Checking your Installation
+Once the install is complete, you can check your install by running the following command
+
+```bash
+# assuming you are in the OpenFASOC directory
+cd openfasoc/generators/glayout
+python3 test_glayout.py
+```
+
+If you get the following error then try the below mentioned commands
+
+![Numpy_error](https://github.com/user-attachments/assets/86e25f1b-f8bc-4f7e-ba59-107218d89f3e)
+
+```
+cd openfasoc/generators/glayout
+python3.10 -m pip install "numpy2.0.0"
+python3 test_glayout.py
+```
+This script will test if:
+1. The python version meets requirements (3.10 or newer)
+2. The conda packages have been installed
+3. The PDKs sky130 or gf180 have been installed and are in their expected locations
+4. Python packages have been properly installed
+5. glayout is working as required. The script:
+   a. places an nmos component
+   b. runs a Layout-vs-Schematic check on it
+
+## Installing kLive
+
+1. Run your container using a previously described run command (Step 8 of Install with Docker)
+2. Run KLayout by just typing “klayout” in the docker container
+3. Install KLive
+   a. Go to Tools -> Manage Packages -> Install New Packages -> Search
+   b. Search for KLive
+   c. Install the package that looks like this:
+   ![kLive](https://github.com/user-attachments/assets/e9da2473-e47c-47d3-890f-d34ae94fb6f1)
+4. Once it's installed, on your host system. Type in “docker ps -a”. This will list all of your running containers. Copy the container ID of the most recently started one or the one you installed klive
+5. Enter the command “docker commit <container id> openfasoc:glayout
+
+you can follow the following playlist to view practical implementation of installation [here](https://www.youtube.com/watch?v=omjUs0bUGHo&list=PLlSXtIpWKQOBaUgQ6gQqfz39XhUoLEWgj) or the following document [here](https://docs.google.com/document/d/e/2PACX-1vRL8ksIvB-fHaqWgkgBPDUznOcDmmFhNrvzPNx9GSSkZyfhJYexEI9gBZCJ0SNNnHdUrAf1EBOeU182/pub) for all the different platforms.
+
 --------------------------------
 
 
