@@ -419,7 +419,9 @@ twoadjtransistor.show()
 ## Routing & Ports
 
 
+## Common Centroid (CC) & Interdigitated Matching Techniques
 
+These are the widely used analof design to make the circuit resistant to variations by matching device characterstics
 
 ### Important Links to Refer
 
