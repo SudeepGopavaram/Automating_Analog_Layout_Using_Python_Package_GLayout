@@ -281,7 +281,8 @@ print(f"minimmum width for via1 {min_width_via1}")
 from glayout.flow.pdk.sky130_mapped import sky130_mapped_pdk as sky130
 from glayout.flow.pdk.gf180_mapped import gf180_mapped_pdk as gf180
 
-min_enc_met1 = sky130.get_grule('via1','met1')["min_enclosure"]
+min_enc_met1 = sky130.get_grule('via1','met1')["min_enclosure"]  //get_grule -- Returns a dictionary describing the relationship between two layers
+        If one layer is specified, returns a dictionary with all intra layer rules
 min_enc_met2 = sky130.get_grule('via1','met2')["min_enclosure"]
 
 
@@ -372,7 +373,7 @@ adjmettrack.write_gds('adjmettrack.gds')
 
 ## Using Primitives
  
- You can find all the primitives that are avaible to us with their sourc code [here](https://github.com/idea-fasoc/OpenFASOC/tree/main/openfasoc/generators/glayout/glayout/flow/primitives)
+ You can find all the primitives that glayout provides with their source code [here](https://github.com/idea-fasoc/OpenFASOC/tree/main/openfasoc/generators/glayout/glayout/flow/primitives)
 
 ```python
 from glayout.flow.primitive.fet import pmos
@@ -384,7 +385,12 @@ pfet = pmos(pdk)
 top_level = component()
 pfet_ref = top_level << pfet
 nfet_ref = top_level << nfet
-compsep = pdk.util_max_metal_separation()  //maximum metal separation(all metal) in a pdk
+compsep = pdk.util_max_metal_separation()  //returns the maximum of the min_seperation rule for all layers specfied
+        although the name of this function is util_max_metal_seperation, layers do not have to be metals
+        you can specify non metals by using metal_levels=list of glayers
+        if metal_levels is list of int, integers are converted to metal levels
+        if a single int is provided, all metals below and including that int level are considerd
+        by default this function returns the maximum metal seperation of metals1-5
 nfet_ref.movex(compsep + evaluate_bbox(pfet)[0])
 return top_level
 
@@ -392,6 +398,22 @@ twoadjtransistor = twotransisitor(sky130)
 twoadjtransistor.write_gds(twatransisitor.gds)
 twoadjtransistor.show()
 ```
+
+![DEFAULT -- NFET(L), PFET(R)](https://github.com/user-attachments/assets/28cd0e44-a14a-4917-b762-8451a4de705e)
+
+![NFET(with_substrate_tap=False, fingers=2), PFET(DEFAULT)](https://github.com/user-attachments/assets/bbec529a-9aff-4d85-abc9-a4a27b680226)
+
+![NFET(with_substrate_tap=False, fingers=2, multipliers=2), PFET(DEFAULT)](https://github.com/user-attachments/assets/4c0fe0df-df7c-4e4f-96b6-2d2210a0b24e)
+
+![NFET(with_substrate_tap=False, fingers=2, multipliers=2, with_tie=false), PFET(DEFAULT)](https://github.com/user-attachments/assets/7d1c95f0-682e-477f-a863-08cd8c86e765)
+
+![NFET(with_substrate_tap=False, fingers=2, multipliers=2, with_tie=false, with_dummy=false), PFET(DEFAULT)](https://github.com/user-attachments/assets/ed9a62d0-7cbd-4bd6-97e9-b1fadd70f6e2)
+
+![NFET(with_substrate_tap=False, fingers=1, multipliers=1, with_tie=false, with_dummy=false, PFET(DEFAULT)](https://github.com/user-attachments/assets/4ae1ae53-530d-4de2-a25c-58849fa09cc8)
+
+![NFET(with_substrate_tap=False, fingers=1, multipliers=1, with_tie=false, with_dummy=false), PFET(with_substrate_tap=False, fingers=1, multipliers=1, with_tie=false, with_dummy=false)](https://github.com/user-attachments/assets/cc327696-649d-4db7-b2fd-e8bedfc381ce)
+
+
 
 
 ## Routing & Ports
