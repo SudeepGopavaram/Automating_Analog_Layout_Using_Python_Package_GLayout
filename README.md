@@ -416,12 +416,34 @@ twoadjtransistor.show()
 
 
 
-## Routing & Ports
+# Routing & Ports
 
+Glayout provides with various placement techniques which you can view from [here](https://github.com/idea-fasoc/OpenFASOC/tree/main/openfasoc/generators/glayout/glayout/flow/routing)
+
+## C_Route 
+
+creates a C shaped route between two Ports.
+![croute](https://github.com/user-attachments/assets/0765b51d-ed8b-410d-914e-c5985f37c6ed)
+
+## Straight_Route
+
+extends a route from edge1 until perpindicular with edge2, then places a via
+This depends on the orientation of edge1 and edge2	if edge1 has the same orientation as edge2, the generator will rotate edge2 180 degrees Will not modify edge1 or edge2
+![sroute](https://github.com/user-attachments/assets/d7021b9f-6835-4ddb-9cd7-6412b0c766ad)
+
+## L_Route
+
+creates a L shaped route between two Ports.
+![lroute](https://github.com/user-attachments/assets/9884ecc2-1883-42b4-aba7-99ca7b75be0e)
+
+
+# Placement
+
+Glayout provides with various placement techniques which you can view from [here](https://github.com/idea-fasoc/OpenFASOC/tree/main/openfasoc/generators/glayout/glayout/flow/placement)
 
 ## Common Centroid (CC) & Interdigitated Matching Techniques
 
-These are the widely used analof design to make the circuit resistant to variations by matching device characterstics
+These are the widely used analog design to make the circuit resistant to variations by matching device characterstics
 
 ### Important Links to Refer
 
