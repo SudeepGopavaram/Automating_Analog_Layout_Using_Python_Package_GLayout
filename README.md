@@ -445,6 +445,46 @@ Glayout provides with various placement techniques which you can view from [here
 
 These are the widely used analog design to make the circuit resistant to variations by matching device characterstics
 
+# DRC and LVS
+
+ DRC -  Checks the interaction of layout shapes
+
+ 1. Spacing
+ 2. Width
+ 3. Enclosure & Overlap
+ 4. Antenna
+ 5. Density
+ 6. Required layers
+
+## Antenna
+
+Damages to gate caused by charge buildup while etching
+--> Damage is cumulative
+--> Mitigated by mosfet drain connections, antenna diodes, or routing changes
+
+## Density
+Ensures the uniformity and avoid issues related to manufacturing variability
+--> maximum and minimum density
+--> overlapping grid based check: for sky130 700um x 700um window at 70um step
+--> minimum density generally not a problem because of fill
+--> minimum clear density = 1 - maximum density (77% maximum density = 23% minimum clear density)
+
+LVS
+
+1. Extraction
+* Layout patterns -> hierarchical text "netlist" of connected parameterized devices
+
+2. Comparison
+* Netlists converted to graphs with devices/subcircuits as nodes and nets as edges
+* Paraller/Series reduction 
+* Topology matching
+* parameter check
+* port check
+
+Resistor reduction
+Mosfet reduction
+
+
 ### Important Links to Refer
 
 [sscs-ose/sscs-ose-chipathon.github.io](https://github.com/sscs-ose/sscs-ose-chipathon.github.io)
