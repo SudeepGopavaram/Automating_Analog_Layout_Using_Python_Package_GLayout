@@ -60,8 +60,6 @@ Ports describe an edges of polygon, they include different attributes like width
 
 To generate a specif macro with number of devices instantiated and connected with each other GLayout provides us with the three types of routes known as C route, Straight route & L route.
 
-
-
 We will be using a python library called GDSFactory for handeling generic layout components & generating the layouts for integrated circuit and we will be saving it in GDSII format.
 
 GLayout will be generating the DRC clean layout & SPICE netlist for any PDK, composed of two parts:
@@ -74,8 +72,11 @@ GLayout will be generating the DRC clean layout & SPICE netlist for any PDK, com
 ![GLayout Workflow](https://github.com/user-attachments/assets/edb7e5af-4546-40c9-b5a0-fa396d41c485)
 
 
+# GDSFactory
 
-.....gdsfactory content
+A python library which is being used in entire process of designing integrated circuits layout and save it directly to GDSII format
+
+It has a generic PDkK framework which helps in describing any PDK in a standardized format with the help of ```MappedPDK``` class along with some optional layout parameters to produce DRC & LVS clean layout which can be used for extraction of pre-PEX SPICE netlist for simulating the circuit
 
 
 # Installation
