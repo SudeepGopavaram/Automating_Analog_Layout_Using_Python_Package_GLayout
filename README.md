@@ -485,6 +485,9 @@ LVS
 Resistor reduction
 Mosfet reduction
 
+# Sizing of transistors
+
+Using pre-computed look-up table
 
 ### Important Links to Refer
 
