@@ -187,7 +187,7 @@ If you get the following error then try the below mentioned commands
 
 ```
 cd openfasoc/generators/glayout
-python3.10 -m pip install "numpy2.0.0"
+python3.10 -m pip install "numpy<2.0.0"
 python3 test_glayout.py
 ```
 This script will test if:
