@@ -636,7 +636,8 @@ myinv.show()
 #myinv.write_gds('test_inverter.gds')
 ```
 
-![Netlist](https://github.com/user-attachments/assets/50badffc-6171-47f8-be3c-1f9bc2d716d7)
+![Netlist](https://github.com/user-attachments/assets/574a39b7-5b60-4653-80c6-e8f0a8baec81)
+
 
 
 # DRC and LVS
