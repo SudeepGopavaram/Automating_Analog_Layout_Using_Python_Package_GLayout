@@ -3,10 +3,15 @@
 //add content on this
 how tedious is it to do manual layouts
 
+The fundamental GLayout engine is Python based and calls the GDSFactory tool for layout manipulation. 
+
 # About the Tools
 
 ## GLayout
-GLayout helps in doing analog layout as a tradition flow of analog include as shown below in the figure which is a very tedious task as compared to digital layout which doesn't include much of a manual work and this gap is brigded through the this tool. Question is HOW?
+GLayout helps in doing analog layout as a tradition flow of analog include as shown below in the figure which is a very tedious task as compared to digital layout which doesn't include much of a manual work and this gap is brigded through the this tool. Question is **HOW?**
+
+Circuit blocks are written with the help of Python functions which accept several parameters like a normal Parameterized Cells (PCells) also PDK as a parameter.
+
 
 ![Analog vs Digital Flow](https://github.com/user-attachments/assets/f7ce852b-8af6-44f9-a99c-d94f4e61a6e6)
 
@@ -719,5 +724,6 @@ Using pre-computed look-up table
 
 [GLayout uick Start Guide Notebook](https://colab.research.google.com/drive/1mU7-zmAWgDRJqaZGP-RkSXCSgRkHOb--?usp=sharing#scrollTo=-Xp4cEjkeHIx)
 
-https://dl.acm.org/doi/10.1145/3670474.3685971
+[Human Language to Analog Layout Using GLayout Layout
+Automation Framework](https://dl.acm.org/doi/10.1145/3670474.3685971)
 
