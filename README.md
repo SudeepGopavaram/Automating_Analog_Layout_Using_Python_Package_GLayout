@@ -1,9 +1,47 @@
 # Pcell_Generation_Using_Python
 
-//add content on this
-how tedious is it to do manual layouts
+# Digital Layout vs. Analog Layout
 
-The fundamental GLayout engine is Python based and calls the GDSFactory tool for layout manipulation. 
+## Digital Layout
+Digital layout refers to the design of digital circuits, which primarily involve logic gates, flip-flops, and other digital components. The process is often automated and involves the following steps:
+
+1. **Schematic Design**: Creating a high-level representation of the circuit.
+2. **Synthesis**: Converting the high-level design into a gate-level netlist.
+3. **Placement**: Determining the positions of the gates on the chip.
+4. **Routing**: Connecting the gates with wires.
+5. **Verification**: Ensuring the design meets timing, power, and area constraints.
+
+   **Characteristics**:
+- **Automation**: Highly automated, reducing manual effort.
+- **Regularity**: Digital circuits are often more regular and repetitive.
+- **Scalability**: Easier to scale for larger designs.
+
+## Analog Layout
+Analog layout involves designing circuits that deal with continuous signals, such as amplifiers, oscillators, and filters. The process is more manual and includes:
+
+1. **Schematic Design**: Creating a detailed circuit diagram.
+2. **Component Placement**: Manually placing components to optimize performance.
+3. **Routing**: Manually routing connections to minimize noise and parasitics.
+4. **Parasitic Extraction**: Analyzing parasitic elements like capacitance and inductance.
+5. **Simulation and Tuning**: Iteratively simulating and tuning the design for optimal performance.
+
+**Characteristics**:
+- **Manual Effort**: Requires significant manual intervention.
+- **Precision**: High precision is needed to meet performance specifications.
+- **Complexity**: More complex due to the need to manage parasitics and noise.
+
+## Which is More Tedious?
+
+**Analog Layout** is generally considered more tedious due to the following reasons:
+
+- **Manual Effort**: Requires a lot of manual placement and routing.
+- **Precision**: High precision is needed, making the process more time-consuming.
+- **Complexity**: Managing parasitics and noise adds to the complexity.
+- **Iterative Process**: Often requires multiple iterations of simulation and tuning.
+
+In contrast, **Digital Layout** benefits from higher levels of automation, making it less tedious and more scalable for larger designs.
+
+This repository explores the fundamentals of **GLayout** engine which is Python based and calls the **GDSFactory** tool for layout manipulation. 
 
 # About the Tools
 
@@ -12,9 +50,7 @@ GLayout helps in doing analog layout as a tradition flow of analog include as sh
 
 Circuit blocks are written with the help of Python functions which accept several parameters like a normal Parameterized Cells (PCells) also PDK as a parameter.
 
-
 ![Analog vs Digital Flow](https://github.com/user-attachments/assets/f7ce852b-8af6-44f9-a99c-d94f4e61a6e6)
-
 
 1. What is we can generalize the design rules & layers.
 
@@ -714,6 +750,69 @@ LVS
 Resistor reduction
 Mosfet reduction
 
+# Parasitic Extraction (PEX)
+
+We can calculate the parasitic capacitance, resistance and inductive effect of an layout that we created for simulation. The script shown below is needed to run the PEX or you can find it [here](https://github.com/idea-fasoc/OpenFASOC/blob/main/openfasoc/generators/glayout/tapeout/tapeout_and_RL/extract.bash.template)
+
+```
+#!/bin/bash
+
+# Actual
+export PDK_ROOT=@@PDK_ROOT
+
+# args:
+# first arg = gds file to read
+# second arg = name of top cell in gds file to read
+# third arg (optional) = noparasitics (basically an LVS extraction)
+
+paropt="@@@PAROPT"
+
+if [ "$paropt" = "noparasitics" ]; then
+
+magic -rcfile ./sky130A/sky130A.magicrc -noconsole -dnull << EOF
+gds read $1
+flatten $2
+load $2
+select top cell
+extract do local
+extract all
+ext2sim labels on
+ext2sim
+ext2spice lvs
+ext2spice cthresh 0
+ext2spice -o $2_pex.spice
+exit
+EOF
+
+else
+
+magic -rcfile ./sky130A/sky130A.magicrc -noconsole -dnull << EOF
+gds read $1
+flatten $2
+load $2
+select top cell
+extract do local
+extract all
+ext2sim labels on
+ext2sim
+extresist tolerance 10
+extresist
+ext2spice lvs
+ext2spice cthresh 0
+ext2spice extresist on
+ext2spice -o $2_pex.spice
+exit
+EOF
+
+fi
+
+rm -f $2.nodes
+rm -f $2.ext
+rm -f $2.res.ext
+rm -f $2.sim
+```
+
+
 # Sizing of transistors
 
 Using pre-computed look-up table
@@ -726,4 +825,5 @@ Using pre-computed look-up table
 
 [Human Language to Analog Layout Using GLayout Layout
 Automation Framework](https://dl.acm.org/doi/10.1145/3670474.3685971)
+[readthedocs](https://openfasoc.readthedocs.io/en/latest/index.html)
 
