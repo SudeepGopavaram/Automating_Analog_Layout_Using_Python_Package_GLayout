@@ -1,5 +1,3 @@
-# Pcell_Generation_Using_Python
-
 # Digital Layout vs. Analog Layout
 
 ## Digital Layout
