@@ -719,4 +719,5 @@ Using pre-computed look-up table
 
 [GLayout uick Start Guide Notebook](https://colab.research.google.com/drive/1mU7-zmAWgDRJqaZGP-RkSXCSgRkHOb--?usp=sharing#scrollTo=-Xp4cEjkeHIx)
 
+https://dl.acm.org/doi/10.1145/3670474.3685971
 
