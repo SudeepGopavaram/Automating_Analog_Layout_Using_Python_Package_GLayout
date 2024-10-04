@@ -204,13 +204,13 @@ docker run -it -v /tmp/.X11-unix:/tmp/.X11-unix -v /mnt/wslg:/mnt/wslg -v $(pwd)
 ```
 
 **Miscellaneous Docker Commands -**
-1. To remove the container, run the command: docker container rm glayoutcontainer
-2. To restart the container, run the command docker container restart glayoutcontainer
+1. To remove the container, run the command: ```docker container rm glayoutcontainer```
+2. To restart the container, run the command ```docker container restart glayoutcontainer```
 3. To execute a running container, first check its status by running
    
-   a. docker container ls -a
+   *a.* ```docker container ls -a```
    
-   b. docker exec -it glayoutcontainer bash (if glayoutcontainer is running) (-it runs the container in interactive mode)
+   *b.* ```docker exec -it glayoutcontainer bash``` (if glayoutcontainer is running) (-it runs the container in interactive mode)
 
 ***Note: ‘exit’ in a running docker container halts all running processes and stops. A graceful shutdown can be achieved by using ```docker stop glayoutcontainer```***
 
@@ -679,8 +679,6 @@ myinv.show()
 
 ![Netlist](https://github.com/user-attachments/assets/574a39b7-5b60-4653-80c6-e8f0a8baec81)
 
-
-
 # DRC and LVS
 
  DRC -  Checks the interaction of layout shapes
@@ -815,15 +813,14 @@ rm -f $2.sim
 
 # Sizing of transistors
 
-Using pre-computed look-up table
 
 ### Important Links to Refer
 
-[sscs-ose/sscs-ose-chipathon.github.io](https://github.com/sscs-ose/sscs-ose-chipathon.github.io)
+**1.***[sscs-ose/sscs-ose-chipathon.github.io](https://github.com/sscs-ose/sscs-ose-chipathon.github.io)*
 
-[GLayout uick Start Guide Notebook](https://colab.research.google.com/drive/1mU7-zmAWgDRJqaZGP-RkSXCSgRkHOb--?usp=sharing#scrollTo=-Xp4cEjkeHIx)
+**2.***[GLayout quick Start Guide Notebook](https://colab.research.google.com/drive/1mU7-zmAWgDRJqaZGP-RkSXCSgRkHOb--?usp=sharing#scrollTo=-Xp4cEjkeHIx)*
 
-[Human Language to Analog Layout Using GLayout Layout
-Automation Framework](https://dl.acm.org/doi/10.1145/3670474.3685971)
-[readthedocs](https://openfasoc.readthedocs.io/en/latest/index.html)
+**3.***[Human Language to Analog Layout Using GLayout Layout Automation Framework](https://dl.acm.org/doi/10.1145/3670474.3685971)*
+
+**4.***[readthedocs](https://openfasoc.readthedocs.io/en/latest/index.html)*
 
