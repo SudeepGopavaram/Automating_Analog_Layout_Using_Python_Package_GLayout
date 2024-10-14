@@ -679,7 +679,9 @@ myinv.show()
 
 # DRC and LVS
 
- DRC -  Checks the interaction of layout shapes
+## Design Rule Check
+
+ **D**esign **R**ule **C**heck -  Checks the interaction of layout shapes
 
  1. Spacing
  2. Width
@@ -687,6 +689,11 @@ myinv.show()
  4. Antenna
  5. Density
  6. Required layers
+
+   ![DRC](https://github.com/user-attachments/assets/adb78201-3a29-4f2a-813d-de7e08df874b)
+
+   # 
+
 
 We can check for DRC to ensure layout does not violate the constraints imposed by the PDK. 
 Design rules for the *Skywater 130 PDK* are described in a ```.lydrc``` [file](https://github.com/idea-fasoc/OpenFASOC/blob/8835b6a0f4d18e355b713a7b9efe7e64a95433a3/openfasoc/generators/glayout/glayout/flow/pdk/sky130_mapped/sky130.lydrc).
@@ -722,7 +729,12 @@ This is a basic script which decodes into to following
 
 Damages to gate caused by charge buildup while etching
 --> Damage is cumulative
---> Mitigated by mosfet drain connections, antenna diodes, or routing changes
+--> Mitigated by mosfet drain connections, "antenna" diodes, or routing changes
+
+![Screenshot from 2024-10-13 09-49-40](https://github.com/user-attachments/assets/752ecc0f-28fe-4a31-bb96-feda3b4d828e)
+
+
+![Screenshot from 2024-10-13 09-50-57](https://github.com/user-attachments/assets/0602e824-9437-4ae0-8336-dd779795e468)
 
 ## Density
 Ensures the uniformity and avoid issues related to manufacturing variability
@@ -730,18 +742,37 @@ Ensures the uniformity and avoid issues related to manufacturing variability
 --> overlapping grid based check: for sky130 700um x 700um window at 70um step
 --> minimum density generally not a problem because of fill
 --> minimum clear density = 1 - maximum density (77% maximum density = 23% minimum clear density)
+	EX: (77% maximum density = 23% minimum clear density)
 
-LVS
+## Layout versus Schematic
+
+LVS consist of
 
 1. Extraction
 * Layout patterns -> hierarchical text "netlist" of connected parameterized devices
+
+  ![Screenshot from 2024-10-13 09-54-12](https://github.com/user-attachments/assets/425a7107-9a5f-4edf-81b6-ca87d007ee23)
+
 
 2. Comparison
 * Netlists converted to graphs with devices/subcircuits as nodes and nets as edges
 * Paraller/Series reduction 
 * Topology matching
-* parameter check
-* port check
+* Parameter check
+* Port check
+
+  ![Screenshot from 2024-10-13 09-58-12](https://github.com/user-attachments/assets/55725718-e0af-4815-a567-806ac808307f)
+
+  ![Screenshot from 2024-10-13 10-01-13](https://github.com/user-attachments/assets/11cfe74f-ae9b-4bed-848f-b71f7a9049eb)
+
+  ![Screenshot from 2024-10-13 10-02-51](https://github.com/user-attachments/assets/c42f5e5b-67d9-4097-ab93-6c561ea4679e)
+
+  * Magic can  be used for (DRC/Extraction) and Netgen (LVS)
+    	* 
+
+
+  
+
 
 Resistor reduction
 Mosfet reduction
